@@ -11,20 +11,24 @@ generator client {
 // Define your own datamodels here and run `yarn redwood prisma migrate dev`
 // to create migrations for them and apply to your dev DB.
 model User {
-  id             Int          @id @default(autoincrement())
-  email          String       @unique
-  firstName      String?
-  lastName       String?
-  avatar         String?
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  role           Role         @default(USER)
-  status         UserStatus[]
-  santa          Pairings[]   @relation(name: "Pairings_Santa")
-  person         Pairings[]   @relation(name: "Pairings_Person")
-  wishList       WishList[]
-  thankYouAuthor ThankYou[]   @relation(name: "ThankYou_User")
-  thankYouToUser ThankYou[]   @relation(name: "ThankYou_ToUser")
+  id                  Int          @id @default(autoincrement())
+  email               String       @unique
+  hashedPassword      String
+  salt                String
+  resetToken          String?
+  resetTokenExpiresAt DateTime?
+  firstName           String?
+  lastName            String?
+  avatar              String?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  role                Role         @default(USER)
+  status              UserStatus[]
+  santa               Pairings[]   @relation(name: "Pairings_Santa")
+  person              Pairings[]   @relation(name: "Pairings_Person")
+  wishList            WishList[]
+  thankYouAuthor      ThankYou[]   @relation(name: "ThankYou_User")
+  thankYouToUser      ThankYou[]   @relation(name: "ThankYou_ToUser")
 }
 
 enum Role {

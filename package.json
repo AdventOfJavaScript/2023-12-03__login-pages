@@ -7,8 +7,9 @@
     ]
   },
   "devDependencies": {
-    "@redwoodjs/cli-storybook": "6.4.1",
-    "@redwoodjs/core": "6.4.1",
+    "@redwoodjs/auth-dbauth-setup": "6.4.2",
+    "@redwoodjs/cli-storybook": "6.4.2",
+    "@redwoodjs/core": "6.4.2",
     "prettier-plugin-tailwindcss": "0.4.1"
   },
   "eslintConfig": {
