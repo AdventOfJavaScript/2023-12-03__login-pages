@@ -119,6 +119,22 @@
     @apply mb-4
   }
 
+  .auth-form {
+    @apply mb-10;
+  }
+
+  .auth-links {
+    @apply text-center text-white;
+  }
+
+  .auth-links a {
+    @apply underline hover:no-underline;
+  }
+
+  .error-message {
+    @apply text-orangeRed block py-2;
+  }
+
   .dropdown {
     @apply relative top-6 left-6
   }

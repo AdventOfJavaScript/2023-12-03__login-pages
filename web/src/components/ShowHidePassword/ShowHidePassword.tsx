@@ -4,7 +4,7 @@ import { Label, PasswordField, TextField } from '@redwoodjs/forms'
 
 import Icon from '../Icon/Icon'
 
-const ShowHidePassword = ({ name }) => {
+const ShowHidePassword = ({ label, name, ...rest }) => {
   const [isPasswordShowing, setIsShowPasswordShowing] = useState(false)
 
   const toggleShowPassword = () => {
@@ -12,18 +12,18 @@ const ShowHidePassword = ({ name }) => {
   }
 
   return (
-    <div className="field relative">
-      <Label name={name}>Label</Label>
+    <div className="relative">
+      <Label name={name}>{label}</Label>
       {isPasswordShowing ? (
-        <PasswordField name={name} placeholder=" " />
+        <TextField name={name} placeholder=" " {...rest} />
       ) : (
-        <TextField name={name} placeholder=" " />
+        <PasswordField name={name} placeholder=" " {...rest} />
       )}
       <button className="absolute right-6 top-8" onClick={toggleShowPassword}>
         {isPasswordShowing ? (
-          <Icon id="eyeClosed" size={32} />
-        ) : (
           <Icon id="eyeOpened" size={32} />
+        ) : (
+          <Icon id="eyeClosed" size={32} />
         )}
       </button>
     </div>

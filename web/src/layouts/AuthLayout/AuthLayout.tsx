@@ -11,9 +11,9 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
         <img
           src="/images/logo__secret-santa.svg"
           alt="Secret Santa"
-          className="mx-auto mb-10 w-[460px] pt-16"
+          className="mx-auto mb-10 w-[460px] pt-24"
         />
-        {children}
+        <div className="mx-auto max-w-[660px]">{children}</div>
       </main>
       <Footer />
     </>

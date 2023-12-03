@@ -1,11 +1,19 @@
 import { useEffect, useRef } from 'react'
 
-import { Form, Label, TextField, Submit, FieldError } from '@redwoodjs/forms'
-import { navigate, routes } from '@redwoodjs/router'
+import {
+  Form,
+  Label,
+  TextField,
+  Submit,
+  FieldError,
+  EmailField,
+} from '@redwoodjs/forms'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
+import HeaderWithRulers from 'src/components/HeaderWithRulers/HeaderWithRulers'
 
 const ForgotPasswordPage = () => {
   const { isAuthenticated, forgotPassword } = useAuth()
@@ -41,52 +49,36 @@ const ForgotPasswordPage = () => {
     <>
       <MetaTags title="Forgot Password" />
 
-      <main className="rw-main">
-        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
-          <div className="rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">
-                Forgot Password
-              </h2>
-            </header>
+      <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
+      <HeaderWithRulers
+        className="mb-8 text-white"
+        heading="Forgot Password?"
+      />
+      <Form onSubmit={onSubmit} className="auth-form">
+        <div className="field">
+          <Label name="email" errorClassName="error">
+            Email
+          </Label>
+          <EmailField
+            name="email"
+            errorClassName="error"
+            ref={emailRef}
+            validation={{
+              required: {
+                value: true,
+                message: 'Email is required',
+              },
+            }}
+          />
 
-            <div className="rw-segment-main">
-              <div className="rw-form-wrapper">
-                <Form onSubmit={onSubmit} className="rw-form-wrapper">
-                  <div className="text-left">
-                    <Label
-                      name="email"
-                      className="rw-label"
-                      errorClassName="rw-label rw-label-error"
-                    >
-                      Email
-                    </Label>
-                    <TextField
-                      name="email"
-                      className="rw-input"
-                      errorClassName="rw-input rw-input-error"
-                      ref={emailRef}
-                      validation={{
-                        required: {
-                          value: true,
-                          message: 'Email is required',
-                        },
-                      }}
-                    />
-
-                    <FieldError name="email" className="rw-field-error" />
-                  </div>
-
-                  <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">Submit</Submit>
-                  </div>
-                </Form>
-              </div>
-            </div>
-          </div>
+          <FieldError name="email" className="error-message" />
         </div>
-      </main>
+
+        <Submit>Submit</Submit>
+      </Form>
+      <div className="auth-links">
+        <Link to={routes.login()}>Ready to Login?</Link>
+      </div>
     </>
   )
 }

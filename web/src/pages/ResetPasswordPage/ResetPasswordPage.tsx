@@ -12,6 +12,8 @@ import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
+import HeaderWithRulers from 'src/components/HeaderWithRulers/HeaderWithRulers'
+import ShowHidePassword from 'src/components/ShowHidePassword/ShowHidePassword'
 
 const ResetPasswordPage = ({ resetToken }: { resetToken: string }) => {
   const { isAuthenticated, reauthenticate, validateResetToken, resetPassword } =
@@ -61,59 +63,32 @@ const ResetPasswordPage = ({ resetToken }: { resetToken: string }) => {
     <>
       <MetaTags title="Reset Password" />
 
-      <main className="rw-main">
-        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
-          <div className="rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">
-                Reset Password
-              </h2>
-            </header>
+      <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
 
-            <div className="rw-segment-main">
-              <div className="rw-form-wrapper">
-                <Form onSubmit={onSubmit} className="rw-form-wrapper">
-                  <div className="text-left">
-                    <Label
-                      name="password"
-                      className="rw-label"
-                      errorClassName="rw-label rw-label-error"
-                    >
-                      New Password
-                    </Label>
-                    <PasswordField
-                      name="password"
-                      autoComplete="new-password"
-                      className="rw-input"
-                      errorClassName="rw-input rw-input-error"
-                      disabled={!enabled}
-                      ref={passwordRef}
-                      validation={{
-                        required: {
-                          value: true,
-                          message: 'New Password is required',
-                        },
-                      }}
-                    />
+      <HeaderWithRulers className="mb-8 text-white" heading="Reset Password" />
+      <Form onSubmit={onSubmit} className="rw-form-wrapper">
+        <div className="field">
+          <ShowHidePassword
+            name="password"
+            autoComplete="new-password"
+            className="rw-input"
+            errorClassName="rw-input rw-input-error"
+            disabled={!enabled}
+            ref={passwordRef}
+            validation={{
+              required: {
+                value: true,
+                message: 'New Password is required',
+              },
+            }}
+            label=" New Password"
+          />
 
-                    <FieldError name="password" className="rw-field-error" />
-                  </div>
-
-                  <div className="rw-button-group">
-                    <Submit
-                      className="rw-button rw-button-blue"
-                      disabled={!enabled}
-                    >
-                      Submit
-                    </Submit>
-                  </div>
-                </Form>
-              </div>
-            </div>
-          </div>
+          <FieldError name="password" className="rw-field-error" />
         </div>
-      </main>
+
+        <Submit disabled={!enabled}>Submit</Submit>
+      </Form>
     </>
   )
 }
