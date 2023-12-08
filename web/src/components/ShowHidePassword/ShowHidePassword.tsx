@@ -19,7 +19,7 @@ const ShowHidePassword = ({ label, name, ...rest }) => {
       ) : (
         <PasswordField name={name} placeholder=" " {...rest} />
       )}
-      <button className="absolute right-6 top-8" onClick={toggleShowPassword}>
+      <button className="absolute right-6 top-8" onClick={toggleShowPassword} type="button">
         {isPasswordShowing ? (
           <Icon id="eyeOpened" size={32} />
         ) : (
